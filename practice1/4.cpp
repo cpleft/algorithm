@@ -87,11 +87,12 @@ int main()
 
     int size = v1.size() + v2.size();
 
-    while (k-- && size--)
+    while (--k && size--)
     {
         double x = my_mergePop(v1, v2);
-        cout << x << " ";
     }
+    double x = my_mergePop(v1, v2);
+    cout << x << " ";
     cout << endl;
 
     return 0;
