@@ -18,15 +18,17 @@ int main()
     vector<int> v;
     vector<int>::iterator it = v.begin();
 
-    cout << "随机生成 30 个小于 10000 的自然数。" << endl;
-    cout << "一共等待排序的数字有: " << 30 << " 个。" << endl;
+    cout << "随机生成 1000000 个小于 10000 的自然数。" << endl;
+    cout << "一共等待排序的数字有: " << 1000000 << " 个。" << endl;
 
-    for (int i = 0; i < 30; i++)
+    
+    srand(time(0));
+    for (int i = 0; i < 10000000; i++)
         v.push_back(rand()%10000);
 
-    for (it = v.begin(); it != v.end(); ++it)
-        cout << *it << " ";
-    cout << endl;
+    // for (it = v.begin(); it != v.end(); ++it)
+        // cout << *it << " ";
+    // cout << endl;
     
     clock_t startTime, endTime;
     startTime = clock();

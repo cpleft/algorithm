@@ -8,6 +8,7 @@
 #ifndef  MY_QSORT
 #define  MY_QSORT
  
+#include <iostream>         // for cout
 #include <functional>                       // std::less<>()
 #include <utility>                          // std::swap()
 
@@ -19,8 +20,15 @@ namespace myAlgorithm
     mid3(RandomAccessIterator first, RandomAccessIterator last, Compare comp)
     {
         RandomAccessIterator mid = first + (last - first) / 2;
-        auto mid_value = (*first + *(last-1) + *mid) / 3;
-        return mid_value;
+        if (!comp(*first, *mid))
+            std::swap(*first, *mid);
+        if (!comp(*first, *last-1))
+            std::swap(*first, *(last-1));
+        if (!comp(*mid, *last-1))
+            std::swap(*mid, *(last-1));
+
+        std::swap(*mid, *(last-1));
+        return *(last-1);
     }
 
     template <typename RandomAccessIterator, typename Compare>
@@ -28,16 +36,17 @@ namespace myAlgorithm
                     RandomAccessIterator last, 
                     Compare comp)
     {
-        if (first >= last-1)  // empty or only one element
+        if (first >= last-1)        // empty or only one element
             return;
         
         RandomAccessIterator l = first;
         RandomAccessIterator r = last;
 
-        auto pivot = mid3(first, last, comp);
+        auto pivot = mid3(first, last, comp);   // pivot is at (last-1)
+        --r;                    // skip last-1
         while (true) 
         {
-            while (comp(*l ,pivot))
+            while (comp(*l, pivot))
                 ++l;
             --r;
             while (comp(pivot, *r))
@@ -47,8 +56,13 @@ namespace myAlgorithm
             std::swap(*l, *r);
             ++l;
         }
+        std::swap(*l, *(last-1));
+        // RandomAccessIterator it = first;
+        // for (it = first; it != last; ++it)
+            // std::cout << *it << " ";
+        // std::cout << std::endl;
         // recursive
-        my_qsort(first, l+1, comp);
+        my_qsort(first, l, comp);
         my_qsort(l+1, last, comp);
     }
 
