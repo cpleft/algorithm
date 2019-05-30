@@ -18,12 +18,12 @@ int main()
     vector<int> v;
     vector<int>::iterator it = v.begin();
 
-    cout << "随机生成 1000000 个小于 10000 的自然数。" << endl;
-    cout << "一共等待排序的数字有: " << 1000000 << " 个。" << endl;
+    cout << "随机生成 100000000 个小于 10000 的自然数。" << endl;
+    cout << "一共等待排序的数字有: " << 100000000 << " 个。" << endl;
 
     
     srand(time(0));
-    for (int i = 0; i < 10000000; i++)
+    for (int i = 0; i < 100000000; i++)
         v.push_back(rand()%10000);
 
     // for (it = v.begin(); it != v.end(); ++it)
